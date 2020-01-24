@@ -1,21 +1,27 @@
 require 'openssl'
 
 class User < ApplicationRecord
-
   ITERATIONS = 20_000
   DIGEST = OpenSSL::Digest::SHA256.new
-  VALID_USERNAME_REGEX = /[a-zA-Z0-9_]i/
+  VALID_USERNAME_REGEX = /[a-zA-Z0-9_]+\z/
 
   attr_accessor :password
 
   has_many :questions
-
   validates :email, :username, presence: true
-  validates :username, length: { maximum: 40 }, format: { with: VALID_EMAIL_REGEX }
+  validates :username, length: { maximum: 40 }, format: { with: VALID_USERNAME_REGEX }
   validates :email, :username, uniqueness: true
   validates :email, email: true
   validates :password, presence: true, on: :create
   validates_confirmation_of :password
+
+  before_save :normalize_name
+
+  private
+    def normalize_name
+      self.username = username.downcase
+    end
+
 
   # Шифруем пароль, если он задан
   def encrypt_password
@@ -32,17 +38,14 @@ class User < ApplicationRecord
           password, password_salt, ITERATIONS, DIGEST.length, DIGEST
         )
       )
-
       # Оба поля окажутся записанными в базу при сохранении (save).
     end
   end
-
   # Служебный метод, преобразующий бинарную строку в 16-ричный формат,
   # для удобства хранения.
   def self.hash_to_string(password_hash)
     password_hash.unpack('H*')[0]
   end
-
   # Основной метод для аутентификации юзера (логина). Проверяет email и пароль,
   # если пользователь с такой комбинацией есть в базе возвращает этого
   # пользователя. Если нету — возвращает nil.
@@ -64,7 +67,6 @@ class User < ApplicationRecord
     # никогда и не сохраняется нигде. Если пароли совпали, возвращаем
     # пользователя.
     return user if user.password_hash == hashed_password
-
     # Иначе, возвращаем nil
     nil
   end
