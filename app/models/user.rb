@@ -10,7 +10,7 @@ class User < ApplicationRecord
   has_many :questions
   validates :email, :username, presence: true
   validates :username, length: { maximum: 40 }, format: { with: VALID_USERNAME_REGEX }
-  validates :email, :username, uniqueness: true
+  validates :email, :username, :id, uniqueness: true
   validates :email, email: true
   validates :password, presence: true, on: :create
   validates_confirmation_of :password
@@ -21,7 +21,6 @@ class User < ApplicationRecord
     def normalize_name
       self.username = username.downcase
     end
-
 
   # Шифруем пароль, если он задан
   def encrypt_password
