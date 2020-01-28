@@ -8,14 +8,16 @@ class User < ApplicationRecord
   attr_accessor :password
 
   has_many :questions
+  before_validation :normalize_name
+  
   validates :email, :username, presence: true
   validates :username, length: { maximum: 40 }, format: { with: VALID_USERNAME_REGEX }
   validates :email, :username, :id, uniqueness: true
   validates :email, email: true
   validates :password, presence: true, on: :create
   validates_confirmation_of :password
+  before_save :encrypt_password
 
-  before_save :normalize_name
 
   private
     def normalize_name
@@ -24,7 +26,7 @@ class User < ApplicationRecord
 
   # Шифруем пароль, если он задан
   def encrypt_password
-    if password.present?
+    if self.password.present?
       # Создаем т. н. «соль» — рандомная строка усложняющая задачу хакерам по
       # взлому пароля, даже если у них окажется наша база данных.
       self.password_salt = User.hash_to_string(OpenSSL::Random.random_bytes(16))
