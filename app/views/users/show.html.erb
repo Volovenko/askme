@@ -43,5 +43,6 @@
         <%= render partial: 'questions/question', object: question %>
       <% end %>
     </div>
+          <%= "Всего #{@questions.size} #{inclination(@questions.size, 'вопрос', 'вопроса', 'вопросов')}" %>
   </div>
 </div>
