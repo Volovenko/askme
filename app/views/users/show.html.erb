@@ -46,12 +46,12 @@
     <div class="user-statistics container text-center">
       <div class="column-1-3">
         <h1 class="title-small"><%= @questions_count %></h1>
-        <p><%="#{inclination_questions(@questions_count, 'вопрос', 'вопроса', 'вопросов')}" %></p>        
+        <p><%="#{inclination(@questions_count, 'вопрос', 'вопроса', 'вопросов')}" %></p>        
       </div>
 
     <div class="column-1-3">
       <h1 class="title-small"><%= @answers_count %></h1>
-      <p><%="#{inclination_answers(@answers_count, 'ответ', 'ответа', 'ответов')}" %></p>        
+      <p><%="#{inclination(@answers_count, 'ответ', 'ответа', 'ответов')}" %></p>        
     </div>
 
     <div class="column-1-3">
