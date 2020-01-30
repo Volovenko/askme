@@ -11,9 +11,11 @@ module ApplicationHelper
     sklonenie = number % 10
     big_sklonenie = number % 100
 
-	  if (number == nil || !number.is_a?(Numeric))
-	    number = 0
-    elsif big_sklonenie.between?(11, 14)
+    if (number == nil || !number.is_a?(Numeric))
+      number = 0
+    end
+	  
+    if big_sklonenie.between?(11, 14)
       voprosov
     elsif sklonenie == 1
       vopros
