@@ -7,7 +7,11 @@ module ApplicationHelper
     end
   end
 
-def inclination(number, vopros, voprosa, voprosov)
+  def fa_icon(icon_class)
+    content_tag 'span', '', class: "fa fa-#{icon_class}"
+  end
+
+  def inclination(number, vopros, voprosa, voprosov)
     if (number == nil || !number.is_a?(Numeric))
       number = 0
     end
@@ -24,7 +28,7 @@ def inclination(number, vopros, voprosa, voprosov)
     if (2..4).include?(ostatok)
       return voprosa
     end
-    
+
     if ostatok > 4 || ostatok == 0
       return voprosov
     end
