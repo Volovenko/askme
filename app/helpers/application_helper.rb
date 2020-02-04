@@ -7,22 +7,26 @@ module ApplicationHelper
     end
   end
 
-  def inclination(number, vopros, voprosa, voprosov)
-    sklonenie = number % 10
-    big_sklonenie = number % 100
-
+def inclination(number, vopros, voprosa, voprosov)
     if (number == nil || !number.is_a?(Numeric))
       number = 0
     end
-	  
-    if big_sklonenie.between?(11, 14)
-      voprosov
-    elsif sklonenie == 1
-      vopros
-    elsif sklonenie.between?(2, 4)
-      voprosa
-    else
-      voprosov
+
+    if (11..14).include?(number % 100)
+      return voprosov
+    end
+    # Склоняем в зависимости от остатка деления на 10
+    ostatok = number % 10
+    if ostatok == 1
+      return vopros
+    end
+
+    if (2..4).include?(ostatok)
+      return voprosa
+    end
+    
+    if ostatok > 4 || ostatok == 0
+      return voprosov
     end
   end
 end
