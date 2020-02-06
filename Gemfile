@@ -9,7 +9,10 @@ gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
 gem 'webpacker', '~> 4.0'
 
 gem 'email_validator'
+
 gem 'uglifier'
+
+gem 'rails_12factor'
 
 gem 'jquery-rails'
 
