@@ -28,6 +28,13 @@ class UsersController < ApplicationController
 
   end
 
+  def destroy
+    session[:user_id] = nil
+    @user = User.find(params[:id])
+    @user.destroy
+    redirect_to root_url, notice: "Ваш аккаунт был удален"
+  end
+
   def update
     if @user.update(user_params)
       redirect_to user_path(@user), notice: 'Данные обновлены'
