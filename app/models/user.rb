@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :questions
   before_validation :normalize_name
   
-  validates :custom_header, format: { with: VALID_CUSTOM_HEADER}
+  validates :custom_header, format: { with: VALID_CUSTOM_HEADER }, allow_blank: true
   validates :email, :username, presence: true
   validates :username, length: { maximum: 40 }, format: { with: VALID_USERNAME_REGEX }
   validates :email, :username, :id, uniqueness: true
