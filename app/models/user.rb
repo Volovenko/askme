@@ -4,12 +4,14 @@ class User < ApplicationRecord
   ITERATIONS = 20_000
   DIGEST = OpenSSL::Digest::SHA256.new
   VALID_USERNAME_REGEX = /[a-zA-Z0-9_]+\z/
+  VALID_CUSTOM_HEADER = /\A#\h{6}\z/
 
   attr_accessor :password
 
   has_many :questions
   before_validation :normalize_name
   
+  validates :custom_header, format: { with: VALID_CUSTOM_HEADER}
   validates :email, :username, presence: true
   validates :username, length: { maximum: 40 }, format: { with: VALID_USERNAME_REGEX }
   validates :email, :username, :id, uniqueness: true

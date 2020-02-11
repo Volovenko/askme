@@ -16,6 +16,8 @@ gem 'rails_12factor'
 
 gem 'jquery-rails'
 
+gem 'jquery-minicolors-rails'
+
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :production do

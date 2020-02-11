@@ -1,3 +1,7 @@
+.minicolors-theme-default .minicolors-input {
+  height: 30px !important;
+}
+
 .users-list-item {
   display: inline-block;
 }

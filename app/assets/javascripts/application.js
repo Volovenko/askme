@@ -14,11 +14,16 @@
 //
 //= require jquery3
 //= require jquery_ujs
+//= require jquery.minicolors
 //= require_tree .
 
 // Этот код добавляет обработчик события выдвигания формы при клике на кнопку
 // «Задать вопрос», которая видна только, когда страница открыта в маленьком
 // окне.
+
+jQuery( function($) {
+    $(".colorpicker").minicolors()
+});
 
 $(function(){
   $('#ask-button').click(function(){
