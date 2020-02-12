@@ -15,8 +15,6 @@ gem 'uglifier'
 gem 'execjs'
 gem 'therubyracer', :platforms => :ruby
 
-gem 'rails_12factor'
-
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :production do
