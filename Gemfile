@@ -12,9 +12,10 @@ gem 'email_validator'
 
 gem 'uglifier'
 
-gem 'rails_12factor'
+gem 'execjs'
+gem 'therubyracer', :platforms => :ruby
 
-gem 'jquery-minicolors-rails'
+gem 'rails_12factor'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 

@@ -745,11 +745,6 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@claviska/jquery-minicolors@^2.3.4":
-  version "2.3.4"
-  resolved "https://registry.yarnpkg.com/@claviska/jquery-minicolors/-/jquery-minicolors-2.3.4.tgz#8f5c4af3e7d55396890288b357742711b368f75a"
-  integrity sha512-YSa2enAGxtPNGqI86a49XY3BO+dkEaX0XA6dBpk2+OG60zwNdDmbsoiaQ39dS48jdIEmNTYigw3Kt1YiWc1Q3A==
-
 "@csstools/convert-colors@^1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
@@ -3829,14 +3824,7 @@ jest-worker@^24.9.0:
     merge-stream "^2.0.0"
     supports-color "^6.1.0"
 
-jquery-minicolors@^2.1.10:
-  version "2.1.10"
-  resolved "https://registry.yarnpkg.com/jquery-minicolors/-/jquery-minicolors-2.1.10.tgz#b29eea541d9a32b4e26923168fb2c16271867379"
-  integrity sha1-sp7qVB2aMrTiaSMWj7LBYnGGc3k=
-  dependencies:
-    jquery ">= 1.7.x"
-
-"jquery@>= 1.7.x", jquery@^3.4.1:
+jquery@^3.4.1:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.4.1.tgz#714f1f8d9dde4bdfa55764ba37ef214630d80ef2"
   integrity sha512-36+AdBzCL+y6qjw5Tx7HgzeGCzC81MDDgaUP8ld2zhx58HdqXGoBd+tHdrBMiyjGQs0Hxs/MLZTu/eHNJJuWPw==
