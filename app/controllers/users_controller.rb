@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
 
   def new
-    redirect_to root_url, alert: 'Вы уже залогинены!' if current_user.present?
+    redirect_to root_path, alert: 'Вы уже залогинены!' if current_user.present?
     @user = User.new
   end
 
@@ -17,7 +17,7 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
-      redirect_to root_url, notice: "Отлично, Вы зарегистрировались и залогинились!"
+      redirect_to root_path, notice: "Отлично, Вы зарегистрировались и залогинились!"
     else
       render 'new'
 
@@ -31,14 +31,14 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     session[:user_id] = nil
-    redirect_to root_url, notice: "Ваш аккаунт был удален"
+    redirect_to root_path, notice: "Ваш аккаунт был удален"
   end
 
   def update
     if @user.update(user_params)
       redirect_to user_path(@user), notice: 'Данные обновлены'
     else
-      render 'edit'
+      render :edit
     end
   end
 
