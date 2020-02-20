@@ -15,6 +15,7 @@ class User < ApplicationRecord
   validates :username, length: { maximum: 40 }, format: { with: VALID_USERNAME_REGEX }
   validates :password, presence: true, on: :create, confirmation: true
   validates :custom_header, format: { with: VALID_CUSTOM_HEADER }, allow_blank: true
+  scope :sorted, -> { order(id: :desc) }
 
   def encrypt_password
     if self.password.present?
