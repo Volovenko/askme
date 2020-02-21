@@ -9,6 +9,7 @@ class User < ApplicationRecord
   attr_accessor :password
 
   has_many :questions, dependent: :destroy
+  has_many :authored_questions, class_name: 'Question', foreign_key: 'author_id', dependent: :nullify
   before_save :encrypt_password
   before_validation :normalize_name 
   validates :email, :username, presence: true, uniqueness: true
@@ -16,6 +17,22 @@ class User < ApplicationRecord
   validates :password, presence: true, on: :create, confirmation: true
   validates :custom_header, format: { with: VALID_CUSTOM_HEADER }, allow_blank: true
   scope :sorted, -> { order(id: :desc) }
+
+  def self.authenticate(email, password)
+    user = find_by(email: email)
+    return nil unless user.present?
+    hashed_password = User.hash_to_string(
+      OpenSSL::PKCS5.pbkdf2_hmac(
+        password, user.password_salt, ITERATIONS, DIGEST.length, DIGEST
+      )
+    )
+    return user if user.password_hash == hashed_password
+    nil
+  end
+
+  def self.hash_to_string(password_hash)
+    password_hash.unpack('H*')[0]
+  end
 
   def encrypt_password
     if self.password.present?
@@ -28,22 +45,6 @@ class User < ApplicationRecord
         )
       )
     end
-  end
-
-  def self.hash_to_string(password_hash)
-    password_hash.unpack('H*')[0]
-  end
-
-  def self.authenticate(email, password)
-    user = find_by(email: email)
-    return nil unless user.present?
-    hashed_password = User.hash_to_string(
-      OpenSSL::PKCS5.pbkdf2_hmac(
-        password, user.password_salt, ITERATIONS, DIGEST.length, DIGEST
-      )
-    )
-    return user if user.password_hash == hashed_password
-    nil
   end
 
   private
